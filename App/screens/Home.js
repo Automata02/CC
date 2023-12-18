@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, StatusBar, Image, Dimensions } from "react-native";
+import { View, StyleSheet, StatusBar, Image, Dimensions, Text } from "react-native";
 import colors from '../constants/colors';
 import { ConversionInput } from "../components/ConversionInput";
+import { format } from 'date-fns';
 
 const screen = Dimensions.get('window');
 
@@ -23,10 +24,27 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: screen.width * 0.25,
         height: screen.width * 0.25
+    },
+    text: {
+        color: colors.white,
+        fontSize: 13,
+        textAlign: "center"
+
+    },
+    textHeader: {
+        color: colors.white,
+        fontWeight: "bold",
+        fontSize: 30,
+        marginVertical: 20,
+        textAlign: "center"
     }
 });
 
 export default () => {
+    const baseCurrency = 'USD';
+    const quoteCurrency = 'GBP';
+    const conversionRate = 0.8345;
+    const date = new Date();
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -35,8 +53,10 @@ export default () => {
                 <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode="contain"/>
             </View>
 
+            <Text style={styles.textHeader}>Currency Converter</Text>
+
             <ConversionInput
-                text="USD"
+                text={baseCurrency}
                 value="123"
                 onButtonPress={() => alert('TODO!')}
                 onChangeText={text => console.log("text", text)}
@@ -44,10 +64,15 @@ export default () => {
             />
 
             <ConversionInput
-                text="GBP"
+                text={quoteCurrency}
                 value="123"
                 onButtonPress={() => alert('TODO!')}
+                editable={false}
             />
+
+            <Text style={styles.text}>
+                {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${format(date, 'MMMM do, yyyy')}`}
+            </Text>
         </View>
     )
 };
