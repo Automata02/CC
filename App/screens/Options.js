@@ -1,42 +1,39 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 import colors from '../constants/colors';
-
-const styles = StyleSheet.create({
-    row: {
-        paddingHorizontal: 20,
-        paddingVertical: 16,
-
-    },
-    text: {
-        fontSize: 16,
-        color: colors.text
-    },
-    separator: {
-        backgroundColor: colors.borderColor,
-        height: StyleSheet.hairlineWidth,
-        marginLeft: 20
-    }
-});
+import { RowItem, RowSeparator } from '../components/RowItems';
 
 export default () => {
     return (
         <SafeAreaView>
-            <TouchableOpacity style={styles.row}>
-                <Text style={styles.text}>Themes</Text>
-            </TouchableOpacity>
+            <RowItem
+                text="Themes"
+                onPress={() => alert("todo!")}
+                rightIcon={
+                    <Entypo name="chevron-right" size={20} color={colors.blue} />
+                }
+            />
 
-            <View style={styles.separator} />
+            <RowSeparator />
 
-            <TouchableOpacity style={styles.row}>
-                <Text style={styles.text}>Themes</Text>
-            </TouchableOpacity>
+            <RowItem
+                text="React Native Basics"
+                onPress={() => alert("todo!")}
+                rightIcon={
+                    <Entypo name="export" size={20} color={colors.blue} />
+                }
+            />
 
-            <View style={styles.separator} />
+            <RowSeparator />
 
-            <TouchableOpacity style={styles.row}>
-                <Text style={styles.text}>More Themes</Text>
-            </TouchableOpacity>
+            <RowItem
+                text="React Native by Example"
+                onPress={() => alert("todo!")}
+                rightIcon={
+                    <Entypo name="export" size={20} color={colors.blue} />
+                }
+            />
         </SafeAreaView>
     );
 };
